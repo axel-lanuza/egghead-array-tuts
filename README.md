@@ -1,4 +1,4 @@
-# Egghead JS Arrays serries
+# Egghead JS Array series
 
 Just learning things about arrays over here.
 
