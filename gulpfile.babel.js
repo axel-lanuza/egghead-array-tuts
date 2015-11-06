@@ -42,7 +42,7 @@ gulp.task('default', function(cb) {
     live: true,            //live reload & CSS injection
     verbose: true,         //verbose watchify logging
     //dir: 'app',            //directory to serve
-    //transform: babelify,   //browserify transforms
+    transform: babelify,   //browserify transforms
     plugin: errorify       //display errors in browser
   })
   .on('exit', cb)
