@@ -53,9 +53,6 @@ var evenFilter = data2.filter(function(item) {
 console.log( evenFilter );
 
 
-
-
-
 // For HUGE arrays, Reduce is faster than running FIlter and Map methods.
 // Reduce goes over the array once, while Filter goes once and then Map has to follow after that
 

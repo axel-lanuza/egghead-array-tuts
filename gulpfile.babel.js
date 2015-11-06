@@ -60,7 +60,7 @@ gulp.task('default', function(cb) {
 //////////
 
 gulp.task('todo', () => {
- gulp.src(['./js', './gulpfile.babel.js'])
+ gulp.src(['./js/*.js', './gulpfile.babel.js'])
    .pipe(todo({
      customTags: ['NOTES']
    }))
