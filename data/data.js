@@ -1,4 +1,4 @@
-export var symbols = [
+export var stocks = [
   {
     symbol: "XFX",
     price: 240.22,

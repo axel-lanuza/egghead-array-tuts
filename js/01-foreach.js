@@ -1,3 +1,6 @@
+// https://egghead.io/lessons/javascript-the-array-foreach-method?pl=learn-javascript-arrays-in-depth-dbe40331
+
+
 // Data
 import * as data from '../data/data'
 
@@ -18,7 +21,7 @@ function getStockSymbols(arr) {
   return symbols;
 }
 
-var symbols = getStockSymbols(data.symbols);
+var symbols = getStockSymbols(data.stocks);
 
 
 console.log(JSON.stringify(symbols));
@@ -40,7 +43,7 @@ function getPrices(arr) {
   return prices
 }
 
-var prices = getPrices(data.symbols)
+var prices = getPrices(data.stocks)
 
 console.log( JSON.stringify(prices) );
 
@@ -60,6 +63,6 @@ function getVolume(arr) {
   return volume
 }
 
-var volume = getVolume(data.symbols)
+var volume = getVolume(data.stocks)
 
 console.log( volume );
