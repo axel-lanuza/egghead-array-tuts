@@ -60,9 +60,9 @@ gulp.task('default', function(cb) {
 //////////
 
 gulp.task('todo', () => {
- gulp.src(['./js', './src/**/*.{jade,styl,js,yaml}', './gulpfile.babel.js'])
+ gulp.src(['./js', './gulpfile.babel.js'])
    .pipe(todo({
-     customTags: ['JS-TODO', 'JADE-TODO', 'CSS-TODO', 'YAML-TODO', 'GULP-TODO']
+     customTags: ['NOTES']
    }))
    .pipe(gulp.dest('.'))
    // -> Will output a TODO.md with your todos
