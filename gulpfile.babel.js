@@ -1,26 +1,29 @@
-import budo from 'budo'
-import errorify from 'errorify'
-import garnish from 'garnish'
 import gulp from 'gulp'
+import budo from 'budo'
+import browserify from 'browserify'
+import {configure} from 'babelify'
+
+import filesystem from 'fs'
 import yargs from 'yargs'
 import once from 'once'
 import openURL from 'opn'
-import watchify from 'watchify'
-import babelify from 'babelify'
-import filesystem from 'fs'
+
 import todo from 'gulp-todo'
+
+const babelify = configure({
+  presets: ['es2015', 'stage-0']
+})
 
 const browser = 'google chrome canary'
 const argv = yargs
     .usage('Usage: -d [string] -f [num]')
     .argv
 
-
 // http://stackoverflow.com/questions/20822273/best-way-to-get-folder-and-file-list-in-javascript
-var getAllFilesFromFolder = function(dir = 'js', num = 1) {
+let getAllFilesFromFolder = (dir = 'js', num = 1) => {
   var results = []
-  filesystem.readdirSync(`./${dir}`).forEach(function(file) {
-    results.push(`./${dir}/${file}`)
+  filesystem.readdirSync(`./${dir}`).forEach( file => {
+    results.push(`${dir}/${file}`)
   })
   // Since the directory has a .DS_store file, we don't neet to reduce 'num' by 1. coolish.
   return results[(num)]
@@ -29,36 +32,39 @@ var getAllFilesFromFolder = function(dir = 'js', num = 1) {
 
 const entry = getAllFilesFromFolder(argv.d, argv.f)
 
-//the development task
-gulp.task('default', function(cb) {
 
-  var ready = function(){}
-  var pretty = garnish()
-  pretty.pipe(process.stdout)
+///////////////////
+// Task: DEFAULT //
+///////////////////
+
+gulp.task('default', (cb) => {
+
+  var ready = () => {}
 
   //dev server
-  budo( entry, {
-    stream: pretty,        //pretty-print requests
-    live: true,            //live reload & CSS injection
-    verbose: true,         //verbose watchify logging
-    //dir: 'app',            //directory to serve
-    //transform: babelify.configure({ presets: ["es2015"] }),   //browserify transforms
-    transform: babelify,
-    plugin: errorify       //display errors in browser
-  })
-  .on('exit', cb)
-  .on('connect', function(ev) {
+  budo(entry, {
+    serve: entry,     // end point for our <script> tag
+    stream: process.stdout, // pretty-print requests
+    live: true,             // live reload & CSS injection
+    //dir: 'app',             // directory to serve
+    //open: argv.open,        // whether to open the browser
+    browserify: {
+      transform: babelify   //browserify transforms
+    }
+  }).on('exit', cb)
+  .on('connect', (ev) => {
     ready = once(openURL.bind(null, ev.uri, {app: browser} ))
   })
-  .once('update', function() {
+  .once('update', () => {
     ready()
   })
 })
 
 
-//////////
-// TODO //
-//////////
+
+////////////////
+// Task: TODO //
+////////////////
 
 gulp.task('todo', () => {
  gulp.src(['./js/*.js', './gulpfile.babel.js'])
@@ -69,7 +75,7 @@ gulp.task('todo', () => {
    // -> Will output a TODO.md with your todos
 })
 
-// Just a task for Console loggin stuff
-gulp.task('clog', function() {
+// Just a task for loggin stuff to the console
+gulp.task('clog', () => {
   console.log( entry );
 })
