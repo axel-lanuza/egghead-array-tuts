@@ -1,5 +1,7 @@
 export var nums = [1,2,3,4,5,6,7,8,9,10]
 
+export var names = ['ben', 'minal', 'amir', 'rajan']
+
 export var stocks = [
   {
     symbol: "XFX",
@@ -47,7 +49,7 @@ export var exchanges = [
 ]
 
 
-export var input = [
+export var movies = [
   {
     title: "Batman Begins",
     year: 2005,

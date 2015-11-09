@@ -19,6 +19,8 @@ var doubleMapped = data.map(function(item) {
 
 console.log( "My doubled data:", doubleMapped );
 
+
+// forEach
 var dfe = function(arr) {
   var result = []
   arr.forEach(function(item) {
