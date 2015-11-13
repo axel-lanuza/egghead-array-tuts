@@ -46,4 +46,52 @@ var result = votes.reduce(reducer, initialValue)
 console.log( result );
 
 
-// I need to revisit this 
+
+
+
+// I need to revisit this
+
+
+
+// Tried differently
+var Votes = votes.reduce(reducer, {})
+
+console.log( Votes );
+
+
+
+
+// Doing it all at once
+// Defininf the Accumulator inside the reduce function
+
+var V = votes.reduce( (acc, value) => {
+  if (!acc[value]) {
+    acc[value] = 1
+  } else {
+    acc[value] = acc[value] + 1
+  }
+
+  // return your accumulator
+  return acc
+}, {} )
+
+
+console.log( V );
+
+
+
+
+// Reworded for the hell of it. Not sure if this is a good idea or not.
+var vv = votes.reduce( (votes, vote) => {
+  if (!votes[vote]) {
+    votes[vote] = 1
+  } else {
+    votes[vote] = votes[vote] + 1
+  }
+
+  // return your accumulator
+  return votes
+}, {} )
+
+
+console.log( vv );
